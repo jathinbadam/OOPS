@@ -28,8 +28,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.location.LocationRequest;
 
-
-
 public class maps extends FragmentActivity implements OnMapReadyCallback,
         LocationListener,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
@@ -41,6 +39,7 @@ public class maps extends FragmentActivity implements OnMapReadyCallback,
     Marker mCurrLocationMarker;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
+
 
 
     @Override
@@ -83,10 +82,14 @@ public class maps extends FragmentActivity implements OnMapReadyCallback,
         }
 
         // Add a marker in Sydney and move the camera
+
         double latitude_pick = MainActivity.coordinates_pick[0];
         double longitude_pick = MainActivity.coordinates_pick[1];
         double latitude_drop = MainActivity.coordinates_drop[0];
         double longitude_drop = MainActivity.coordinates_drop[1];
+
+
+
 
         Log.e(TAG, String.valueOf(latitude_pick) + ',' + longitude_pick);
         LatLng pick = new LatLng(latitude_pick, longitude_pick);
