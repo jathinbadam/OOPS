@@ -52,7 +52,7 @@ public class driver_signin extends AppCompatActivity {
                             user_driver user = dataSnapshot.child(edtdriver_phone.getText().toString()).getValue(user_driver.class);
                             Log.d(TAG, "Volley requester " + user.getPassword());
                             if (user.getPassword().equals(edtdriver_password.getText().toString())) {
-                                Toast.makeText(driver_signin.this, "Sign in successful!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(driver_signin.this, "Sign in successful!!", Toast.LENGTH_SHORT).show();//
                             } else
                                 {
                                 Toast.makeText(driver_signin.this, "Wrong Password!!", Toast.LENGTH_SHORT).show();

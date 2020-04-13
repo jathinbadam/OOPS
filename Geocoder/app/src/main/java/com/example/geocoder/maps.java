@@ -81,7 +81,7 @@ public class maps extends FragmentActivity implements OnMapReadyCallback,
             mMap.setMyLocationEnabled(true);
         }
 
-        // Add a marker in Sydney and move the camera
+
 
         double latitude_pick = MainActivity.coordinates_pick[0];
         double longitude_pick = MainActivity.coordinates_pick[1];
@@ -94,6 +94,9 @@ public class maps extends FragmentActivity implements OnMapReadyCallback,
         Log.e(TAG, String.valueOf(latitude_pick) + ',' + longitude_pick);
         LatLng pick = new LatLng(latitude_pick, longitude_pick);
         LatLng drop = new LatLng(latitude_drop, longitude_drop);
+        float results[] = new float[10];
+        Location.distanceBetween(latitude_pick,longitude_pick,latitude_drop,longitude_drop,results);
+        Log.e(TAG, String.valueOf(results[0]));
 
 
         mMap.addMarker(new MarkerOptions().position(pick).title("Intial Point"));

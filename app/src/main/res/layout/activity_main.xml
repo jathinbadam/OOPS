@@ -39,14 +39,15 @@
         android:text="Customer"
         android:textColor="@android:color/black" />
 
-    <Button
-        android:id="@+id/btndriver"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:layout_weight="1"
-        android:background="#E28905"
-        android:text="Driver"
-        android:textColor="@android:color/black" />
+        <Button
+            android:id="@+id/btndriver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_weight="1"
+            android:background="#E28905"
+            android:text="Driver"
+            android:textColor="@android:color/black" />
+
     </LinearLayout>
 </RelativeLayout>
