@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Orderpage"></activity>
+        <activity android:name=".Updatepage" />
+        <activity android:name=".Homepage" />
+        <activity android:name=".signout" />
+        <activity android:name=".Gmailregister" />
         <activity android:name=".Login" />
         <activity android:name=".Forgotpassword" />
         <activity android:name=".Register" />
