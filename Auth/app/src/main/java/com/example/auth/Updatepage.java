@@ -32,6 +32,7 @@ public class Updatepage extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListerner;
     DatabaseReference reff;
     String userID;
+    int counter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class Updatepage extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.updatephone);
         password = (EditText) findViewById(R.id.updatepassword);
         updatebtn = (Button) findViewById(R.id.updatebutton);
+
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference reff = database.getReference("Users");
@@ -60,6 +62,8 @@ public class Updatepage extends AppCompatActivity {
                     email.setText(user.getEMAIL());
                     phone.setText(user.getPHONE());
                     password.setText(user.getPASSWORD());
+                    counter = user.getCOUNTER();
+
                 }
                 else
                     {
@@ -83,6 +87,7 @@ public class Updatepage extends AppCompatActivity {
                      final String PHONE = phone.getText().toString();
                      final String PASSWORD = password.getText().toString();
                      final String COMMUNITY = "USER";
+                     final int COUNTER = counter;
                      reff.addValueEventListener(new ValueEventListener() {
 
                          @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -90,7 +95,7 @@ public class Updatepage extends AppCompatActivity {
                          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                              if (dataSnapshot.child(userID).exists())
                              {
-                                 USER user = new USER(COMMUNITY, EMAIL, NAME, PASSWORD, PHONE);
+                                 USER user = new USER(COMMUNITY, COUNTER, EMAIL, NAME, PASSWORD, PHONE);
                                  reff.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).setValue(user);
                                  Toast.makeText(Updatepage.this, "Sign up successful!!", Toast.LENGTH_SHORT).show();
                                  Intent Homepage = new Intent(Updatepage.this,Homepage.class);

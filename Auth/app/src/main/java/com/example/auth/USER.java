@@ -3,16 +3,18 @@ package com.example.auth;
 public class USER
 {
     private String EMAIL,NAME,PHONE,PASSWORD,COMMUNITY;
+    private int COUNTER;
 
     public USER() {
     }
 
-    public USER( String COMMUNITY ,String EMAIL, String NAME, String PASSWORD, String PHONE) {
+    public USER( String COMMUNITY, int COUNTER, String EMAIL, String NAME, String PASSWORD, String PHONE) {
         this.EMAIL = EMAIL;
         this.NAME = NAME;
         this.PHONE = PHONE;
         this.PASSWORD = PASSWORD;
         this.COMMUNITY = COMMUNITY;
+        this.COUNTER   = COUNTER;
     }
 
     public String getEMAIL() {
@@ -53,5 +55,13 @@ public class USER
 
     public void setCOMMUNITY(String COMMUNITY) {
         this.COMMUNITY = COMMUNITY;
+    }
+
+    public int getCOUNTER() {
+        return COUNTER;
+    }
+
+    public void setCOUNTER(int COUNTER) {
+        this.COUNTER = COUNTER;
     }
 }

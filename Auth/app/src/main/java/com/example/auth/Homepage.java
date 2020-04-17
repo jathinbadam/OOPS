@@ -21,7 +21,7 @@ import java.util.Objects;
 public class Homepage extends AppCompatActivity {
 
     private static final String TAG = "Homepage";
-    Button order,update,orderhistory,logout;
+    Button order,update,ongoing,previous,logout;
     GoogleSignInClient mGoogleSignInClient = Login.mGoogleSignInClient;
     FirebaseAuth auth = Login.mAuth;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -30,14 +30,17 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         Log.d(TAG, Objects.requireNonNull(auth.getCurrentUser()).getUid());
-        order = (Button)findViewById(R.id.orderbtn);
-        update = (Button)findViewById(R.id.updateprofilebtn);
-        orderhistory = (Button)findViewById(R.id.orderhistorybtn);
+        order = (Button)findViewById(R.id.placeorderbtn);
+        update = (Button)findViewById(R.id.updatebtn);
+        ongoing = (Button)findViewById(R.id.ongoingbtn);
+        previous = (Button)findViewById(R.id.previousbtn);
         logout = (Button)findViewById(R.id.logoutbtn);
 
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent Orderpage= new Intent(Homepage.this, Orderpage.class);
+                startActivity(Orderpage);
 
             }
         });
@@ -50,7 +53,14 @@ public class Homepage extends AppCompatActivity {
             }
         });
 
-        orderhistory.setOnClickListener(new View.OnClickListener() {
+        ongoing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Forgotpassword extends AppCompatActivity
 {
@@ -27,12 +29,13 @@ public class Forgotpassword extends AppCompatActivity
         email = (EditText) findViewById(R.id.resetmail);
         btnNewPass = (Button) findViewById(R.id.btnresetpassword);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
 
         btnNewPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String EMAIL = email.getText().toString();
+                firebaseAuth = FirebaseAuth.getInstance();
 
                 if(TextUtils.isEmpty(EMAIL)){
                     Toast.makeText(getApplicationContext(),"Please fill e-mail", Toast.LENGTH_SHORT).show();

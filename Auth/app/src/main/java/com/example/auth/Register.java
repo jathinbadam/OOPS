@@ -61,13 +61,14 @@ public class Register extends AppCompatActivity {
         final String PHONE = phone.getText().toString();
         final String PASSWORD = password.getText().toString();
         final String COMMUNITY = community.getText().toString();
+        final int COUNTER   = 0;
 
         firebaseauth.createUserWithEmailAndPassword(EMAIL, PASSWORD)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            USER user = new USER(COMMUNITY, EMAIL, NAME, PASSWORD, PHONE);
+                            USER user = new USER(COMMUNITY, COUNTER , EMAIL, NAME, PASSWORD, PHONE);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
