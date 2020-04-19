@@ -89,8 +89,8 @@ public class Gmailregister extends AppCompatActivity  {
                             Log.d(TAG, user.getEMAIL());
                             table_user.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).setValue(user);
                             Toast.makeText(Gmailregister.this, "Sign up successful!!", Toast.LENGTH_SHORT).show();
-                            Intent signout = new Intent(Gmailregister.this,signout.class);
-                            startActivity(signout);
+                            Intent Homepage = new Intent(Gmailregister.this,Homepage.class);
+                            startActivity(Homepage);
                             finish();
                         }
 

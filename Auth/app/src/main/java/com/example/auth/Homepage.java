@@ -56,7 +56,8 @@ public class Homepage extends AppCompatActivity {
         ongoing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent currentOrders = new Intent(Homepage.this, Currentorders.class);
+                startActivity(currentOrders);
             }
         });
 
@@ -64,6 +65,8 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent completedOrders = new Intent(Homepage.this, Completedorders.class);
+                startActivity(completedOrders);
             }
         });
 

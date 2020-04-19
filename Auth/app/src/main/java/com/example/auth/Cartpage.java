@@ -30,7 +30,7 @@ public class Cartpage extends AppCompatActivity {
     private static final String TAG = "CartActivity";
     Button placeorder,showprice;
     TextView smalltotal, mediumtotal, largetotal, grandtotal, deliverytotal;
-    List<Integer> cart = new ArrayList<>();
+    public static List<Integer> cart = new ArrayList<>();
     int total_small,total_medium,total_large;
     int small_count,medium_count,large_count;
     int total_grand;
@@ -38,8 +38,11 @@ public class Cartpage extends AppCompatActivity {
     int total_delivery = maps.delivery_charge;
     FirebaseAuth auth = Login.mAuth;
     EditText small,medium,large;
+    public static String orderID ;
+    String name,phone;
     String userID;
     long timestamp;
+    String total = "0";
     public static int counter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +53,25 @@ public class Cartpage extends AppCompatActivity {
         mediumtotal = findViewById(R.id.mediumpackettotalprice);
         largetotal = findViewById(R.id.largepackettotalprice);
         grandtotal = findViewById(R.id.total_price_text_view);
-        showprice  = findViewById(R.id.showprice);
+        showprice = findViewById(R.id.showprice);
         small = findViewById(R.id.smallpacketquantity);
         medium = findViewById(R.id.mediumpacketquantity);
-        large  = findViewById(R.id.largepacketquantity);
+        large = findViewById(R.id.largepacketquantity);
         small = findViewById(R.id.smallpacketquantity);
         deliverytotal = findViewById(R.id.deliverycharges);
         deliverytotal.setText("Delivery charges = " + total_delivery);
         userID = auth.getUid();
+
         final com.example.auth.Location location = new com.example.auth.Location();
-        timestamp = (System.currentTimeMillis()/1000);
+        final com.example.auth.transaction trans = new com.example.auth.transaction();
+        timestamp = (System.currentTimeMillis() / 1000);
         location.setTimestamp(timestamp);
 
         final DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("Orders").child(userID).child("OrderList");
         final DatabaseReference counter_reference = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        final DatabaseReference transaction_Reff = FirebaseDatabase.getInstance().getReference().child("Transactions");
+
 
         counter_reference.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -72,6 +80,8 @@ public class Cartpage extends AppCompatActivity {
                 if (dataSnapshot.child(userID).exists()) {
                     USER user = dataSnapshot.child(userID).getValue(USER.class);
                     counter = user.getCOUNTER();
+                    phone = user.getPHONE();
+                    name = user.getNAME();
 
                 } else {
                     Toast.makeText(Cartpage.this, "User Doesn't exists", Toast.LENGTH_SHORT).show();
@@ -84,10 +94,29 @@ public class Cartpage extends AppCompatActivity {
             }
         });
 
+        showprice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                small_count = Integer.parseInt(small.getText().toString());
+                smallprice = String.valueOf(small_count * 100);
+                medium_count = Integer.parseInt(medium.getText().toString());
+                mediumprice = String.valueOf(medium_count * 200);
+                large_count = Integer.parseInt(large.getText().toString());
+                largeprice = String.valueOf(large_count * 300);
+                smalltotal.setText("Total Price = " + smallprice);
+                mediumtotal.setText("Total Price = " + mediumprice);
+                largetotal.setText("Total Price = " + largeprice);
+                total = String.valueOf((small_count * 100) + (medium_count * 200) + (large_count * 300) + total_delivery);
+                grandtotal.setText("Total Price = " + total);
+            }
+        });
+
 
         placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
 
                 cart.add(small_count);
                 cart.add(medium_count);
@@ -96,7 +125,7 @@ public class Cartpage extends AppCompatActivity {
                 reff.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        
+
                         location.setLatitude_pick(Occasional.coordinates_pick[0]);
                         location.setLongitude_pick(Occasional.coordinates_pick[1]);
                         location.setLatitude_drop(Occasional.coordinates_drop[0]);
@@ -112,41 +141,76 @@ public class Cartpage extends AppCompatActivity {
 
                     }
                 });
-                Intent Sms = new Intent(Cartpage.this, Sms.class);
-                startActivity(Sms);
+
+
+
+//                final int count = counter + 1;
+//                counter_Reff.addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        if (dataSnapshot.child(userID).exists()) {
+//
+//
+//                            counter_Reff.child(Objects.requireNonNull(auth.getCurrentUser()).getUid()).child("counter").setValue(count);
+//                            Toast.makeText(Cartpage.this, "Sign up successful!!", Toast.LENGTH_SHORT).show();
+//                            finish();
+//                        } else {
+//                            Toast.makeText(Cartpage.this, "User Doesn't exists", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+
+
+
+
+                transaction_Reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    {
+                        trans.setLatitude_pick(Occasional.coordinates_pick[0]);
+                        trans.setLongitude_pick(Occasional.coordinates_pick[1]);
+                        trans.setLatitude_drop(Occasional.coordinates_drop[0]);
+                        trans.setLongitude_drop(Occasional.coordinates_drop[1]);
+                        trans.setNAME(name);
+                        orderID = userID+counter;
+                        trans.setOrderId(orderID);
+                        trans.setPHONE(phone);
+                        trans.setCart(cart);
+                        trans.setTotalcost(total);
+                        trans.setStatus("Not yet Assigned");
+                        transaction_Reff.child(Long.toString(timestamp)).setValue(trans);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                Intent Otp = new Intent(Cartpage.this, Otp.class);
+                startActivity(Otp);
+
+//                Intent Register = new Intent(Cartpage.this, Register.class);
+//                startActivity(Register);
+
             }
         });
 
-        showprice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                small_count = Integer.parseInt(small.getText().toString());
-                smallprice = String.valueOf(small_count * 100);
-                medium_count = Integer.parseInt(medium.getText().toString());
-                mediumprice = String.valueOf(medium_count * 200);
-                large_count = Integer.parseInt(large.getText().toString());
-                largeprice = String.valueOf(large_count * 300);
-                smalltotal.setText("Total Price = " + smallprice);
-                mediumtotal.setText("Total Price = " + mediumprice);
-                largetotal.setText("Total Price = " + largeprice);
-                String total = String.valueOf((small_count * 100 )+ (medium_count * 200) + (large_count * 300) + total_delivery);
-                grandtotal.setText("Total Price = " + total);
-            }
-        });
+
+
 
 
     }
-//        @Override
-//        public void onBackPressed()
-//    {
-//        Intent Homepage = new Intent(Cartpage.this, Homepage.class);
-//        startActivity(Homepage);
-//
-//
-//    }
-    }
 
+
+    }
 
 
 

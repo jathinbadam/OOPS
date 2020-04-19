@@ -13,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Sms"></activity>
+        <activity android:name=".Tracking"></activity>
+        <activity android:name=".Smspage" />
+        <activity android:name=".Conformationpage" />
+        <activity android:name=".Otp" />
+        <activity android:name=".Completedorders" />
+        <activity android:name=".Currentorders" />
+        <activity android:name=".Sms" />
         <activity android:name=".Cartpage" />
         <activity android:name=".maps" />
 
