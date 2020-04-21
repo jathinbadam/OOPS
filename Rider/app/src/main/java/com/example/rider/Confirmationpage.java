@@ -64,6 +64,21 @@ public class Confirmationpage extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+
+                final DatabaseReference reff = FirebaseDatabase.getInstance().getReference("Orders").child(Orderpage.iduser).child("OrderList");
+
+                reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    {
+                        reff.child(Integer.toString(Orderpage.counter)).child("status").setValue("Completed");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 Intent i = new Intent(Confirmationpage.this,Homepage.class);
                 startActivity(i);
 

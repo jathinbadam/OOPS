@@ -183,6 +183,8 @@ public class Cartpage extends AppCompatActivity {
                         trans.setOrderId(orderID);
                         trans.setPHONE(phone);
                         trans.setCart(cart);
+                        trans.setUserId(userID);
+                        trans.setCounter(counter);
                         trans.setTotalcost(total);
                         trans.setStatus("Not yet Assigned");
                         transaction_Reff.child(Long.toString(timestamp)).setValue(trans);

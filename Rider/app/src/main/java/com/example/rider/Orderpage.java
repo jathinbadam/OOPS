@@ -54,6 +54,8 @@ public class Orderpage extends AppCompatActivity implements LocationListener {
     public static   String status;
     public static   String totalcost;
     public static   String OrderId;
+    public static  String iduser;
+    public static int counter;
 
     Boolean result = true;
     private String driverphone,drivername;
@@ -159,6 +161,8 @@ public class Orderpage extends AppCompatActivity implements LocationListener {
                 longitude_drop = trans.getLongitude_drop();
                 NAME = trans.getNAME();
                 PHONE = trans.getPHONE();
+                counter = trans.getCounter();
+                iduser = trans.getUserId();
                 status = trans.getStatus();
                 totalcost = trans.getTotalcost();
                 OrderId = trans.getOrderId();

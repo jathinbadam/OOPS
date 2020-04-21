@@ -13,12 +13,16 @@ public class transaction
     private  String status;
     private  String totalcost;
     private  String OrderId;
+    private  String UserId;
+    private int counter;
+
+
 
 
     public transaction() {
     }
 
-    public transaction(double latitude_pick, double longitude_pick, double latitude_drop, double longitude_drop, String NAME, String PHONE, List<Integer> cart, String status, String totalcost, String orderId) {
+    public transaction(double latitude_pick, double longitude_pick, double latitude_drop, double longitude_drop, String NAME, String PHONE, List<Integer> cart, String status, String totalcost, String orderId, String userId, int counter) {
         this.latitude_pick = latitude_pick;
         this.longitude_pick = longitude_pick;
         this.latitude_drop = latitude_drop;
@@ -29,8 +33,25 @@ public class transaction
         this.status = status;
         this.totalcost = totalcost;
         OrderId = orderId;
+        UserId = userId;
+        this.counter = counter;
     }
 
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
 
     public String getOrderId() {
         return OrderId;

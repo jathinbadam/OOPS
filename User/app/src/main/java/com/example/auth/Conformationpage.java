@@ -40,20 +40,7 @@ public class Conformationpage extends AppCompatActivity
         userID = auth.getUid();
 
 
-        final DatabaseReference reff = FirebaseDatabase.getInstance().getReference("Orders").child(userID).child("OrderList");
 
-        reff.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
-                reff.child(Integer.toString(counter)).child("status").setValue("Completed");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
 
