@@ -38,13 +38,6 @@ public class Conformationpage extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conformationpage);
         userID = auth.getUid();
-
-
-
-
-
-
-
         ordernumber = findViewById(R.id.ordernumbertext);
         driverphonetext = findViewById(R.id.phonenumbertext);
         drivernametext = findViewById(R.id.nametext);
@@ -54,8 +47,6 @@ public class Conformationpage extends AppCompatActivity
         navigation = findViewById(R.id.showlocation);
         backtohome = findViewById(R.id.orderagain);
         totalcost = findViewById(R.id.totalcosttext);
-
-
         ordernumber.setText(Cartpage.orderID);
         drivernametext.setText(Otp.drivername);
         driverphonetext.setText(Otp.driverphone);
@@ -69,9 +60,6 @@ public class Conformationpage extends AppCompatActivity
         medium.setText(String.valueOf("Medium Packets : "  + Cartpage.cart.get(1)));
         large.setText(String.valueOf("Large Packets : " +  Cartpage.cart.get(2)));
         totalcost.setText("Total Cost : " + Cartpage.total);
-
-
-
         navigation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

@@ -172,6 +172,7 @@ public class Orderpage extends AppCompatActivity {
                             trans.setOrderId(orderID);
                             trans.setPHONE(phone);
                             trans.setCart(cart);
+                            trans.setUserId(userID);
                             trans.setTotalcost(totalcost);
                             trans.setStatus("Not yet Assigned");
                             regular_transaction_Reff.child(Long.toString(timestamp)).setValue(trans);

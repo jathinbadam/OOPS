@@ -76,28 +76,30 @@ public class Regularconfirmation extends AppCompatActivity {
 
 
 
-        final DatabaseReference regular_counter_Reff = FirebaseDatabase.getInstance().getReference().child("Users");
-
-        regular_counter_Reff.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(userID).exists()) {
-                    regular_counter_Reff.child(userID).child("counter").setValue(count);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
         navigation.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
+                final DatabaseReference regular_counter_Reff = FirebaseDatabase.getInstance().getReference().child("Users");
+
+                regular_counter_Reff.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.child(userID).exists()) {
+                            regular_counter_Reff.child(userID).child("counter").setValue(count);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 Intent regularotp = new Intent(Regularconfirmation.this, Regulartracking.class);
                 startActivity(regularotp);
             }

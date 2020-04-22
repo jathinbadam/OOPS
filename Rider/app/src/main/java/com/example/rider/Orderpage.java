@@ -35,7 +35,7 @@ import java.util.Random;
 
 public class Orderpage extends AppCompatActivity implements LocationListener {
 
-    private static final String TAG = "Order page";
+    private static final String TAG = "Order page-----------";
     TextView orderno,customername,customerphone;
     Button OTPbtn;
     public static double[] coordinates_current = new double[2];
@@ -324,6 +324,8 @@ public class Orderpage extends AppCompatActivity implements LocationListener {
     {
         coordinates_current[0] =  (location.getLatitude());
         coordinates_current[1] = (location.getLongitude());
+        Log.d(TAG, "latitudeeeee " + coordinates_current[0]);
+        Log.d(TAG, "longitudeee"  + coordinates_current[1]);
     }
 
     @Override
